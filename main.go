@@ -16,7 +16,7 @@ func main() {
 	welcome := Welcome{"Book your appointment at the clinic now", time.Now().Format(time.Stamp)}
 	template := template.Must(template.ParseFiles("template/template.html"))
 
-	http.Handle("static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if clinic := r.FormValue("clinic"); clinic != "" {
 			welcome.Clinic = clinic

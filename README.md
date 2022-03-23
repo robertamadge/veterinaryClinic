@@ -37,3 +37,5 @@ Logar para acessar o sistema.
     <li>Listar</li>
   </ul>
 </ol>
+
+### I need to connect to docker first docker-compose up -d , go run cmd/main.go , open postman, open tablePlus

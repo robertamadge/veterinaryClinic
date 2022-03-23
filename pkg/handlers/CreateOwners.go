@@ -2,15 +2,14 @@ package handlers
 
 import (
 	"encoding/json"
-	"github.com/robertamadge/veterinayClinic/pkg/mocks"
+	"fmt"
 	"github.com/robertamadge/veterinayClinic/pkg/models"
 	"io/ioutil"
 	"log"
-	"math/rand"
 	"net/http"
 )
 
-func CreateOwners(w http.ResponseWriter, r *http.Request) {
+func (h handler) CreateOwners(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 
@@ -21,11 +20,13 @@ func CreateOwners(w http.ResponseWriter, r *http.Request) {
 	var owner models.Owner
 	json.Unmarshal(body, &owner)
 
-	owner.Id = rand.Intn(100)
-	mocks.Owners = append(mocks.Owners, owner)
+	// Append to the Owners table
+	if result := h.DB.Create(&owner); result.Error != nil {
+		fmt.Println(result.Error)
+	}
 
-	w.WriteHeader(http.StatusCreated)
 	w.Header().Add("Content-type", "application/json")
+	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode("Created")
 
 }

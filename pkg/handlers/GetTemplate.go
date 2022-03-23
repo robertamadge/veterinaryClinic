@@ -2,11 +2,11 @@ package handlers
 
 import (
 	"bytes"
-	"net/http"
 	"html/template"
+	"net/http"
 )
 
-func GetTemplate(w http.ResponseWriter, r *http.Request) {
+func (h handler) GetTemplate(w http.ResponseWriter, r *http.Request) {
 	template := template.Must(template.ParseFiles("template/template.html"))
 	var buf bytes.Buffer
 	err := template.Execute(&buf, nil)

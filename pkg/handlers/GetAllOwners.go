@@ -2,12 +2,19 @@ package handlers
 
 import (
 	"encoding/json"
-	"github.com/robertamadge/veterinayClinic/pkg/mocks"
+	"fmt"
+	"github.com/robertamadge/veterinayClinic/pkg/models"
 	"net/http"
 )
 
-func GetAllOwners(w http.ResponseWriter, r *http.Request) {
+func (h handler) GetAllOwners(w http.ResponseWriter, r *http.Request) {
+	var owners []models.Owner
+
+	if result := h.DB.Find(&owners); result.Error != nil {
+		fmt.Println(result.Error)
+	}
+
 	w.Header().Add("Content-type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(mocks.Owners)
+	json.NewEncoder(w).Encode(owners)
 }

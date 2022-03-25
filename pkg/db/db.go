@@ -3,6 +3,7 @@ package db
 import (
 	"github.com/robertamadge/veterinayClinic/pkg/models"
 	"gorm.io/driver/postgres"
+	_ "gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
 )

@@ -8,12 +8,17 @@ import (
 	"net/http"
 )
 
+
 func main() {
 	DB := db.Init()
 	h := handlers.New(DB)
 	router := mux.NewRouter()
 
 	router.HandleFunc("/", h.GetTemplate)
+
+	router.HandleFunc("/register", h.RegisteHandler)
+	router.HandleFunc("/registerauth", h.RegisterAuthHandler)
+
 	router.HandleFunc("/owners", h.GetAllOwners).Methods(http.MethodGet)
 	router.HandleFunc("/owners/{id}", h.GetOwner).Methods(http.MethodGet)
 	router.HandleFunc("/owners", h.CreateOwners).Methods(http.MethodPost)
@@ -21,3 +26,4 @@ func main() {
 	router.HandleFunc("/owners/{id}", h.DeleteOwner).Methods(http.MethodDelete)
 	fmt.Println(http.ListenAndServe(":8000", router))
 }
+

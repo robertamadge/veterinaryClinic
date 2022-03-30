@@ -3,10 +3,10 @@ package db
 import (
 	"github.com/robertamadge/veterinayClinic/pkg/models"
 	"gorm.io/driver/postgres"
-	_ "gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
 )
+
 
 func Init() *gorm.DB {
 	dbURL := "postgres://pg:pass@localhost:5432/crud"
@@ -18,6 +18,17 @@ func Init() *gorm.DB {
 	}
 
 	db.AutoMigrate(&models.Owner{})
+	db.Migrator().CreateConstraint(&models.Owner{}, "Pets")
+	db.Migrator().CreateConstraint(&models.Owner{}, "fk_owners_pets")
+	db.AutoMigrate(&models.Pet{})
+	db.Migrator().CreateConstraint(&models.Pet{}, "Owners")
+	db.Migrator().CreateConstraint(&models.Pet{}, "fk_owners_pets")
+	db.AutoMigrate(&models.Appointment{})
+	db.Migrator().CreateConstraint(&models.Appointment{}, "Pets")
+	db.Migrator().CreateConstraint(&models.Appointment{}, "fk_appointments_pets")
+	db.Migrator().CreateConstraint(&models.Appointment{}, "Doctors")
+	db.Migrator().CreateConstraint(&models.Appointment{}, "fk_appointments_doctors")
+	db.AutoMigrate(&models.Doctor{})
 
 	return db
 }

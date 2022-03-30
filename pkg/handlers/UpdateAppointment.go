@@ -11,7 +11,7 @@ import (
 	"strconv"
 )
 
-func (h handler) UpdateOwner(w http.ResponseWriter, r *http.Request) {
+func (h handler) UpdateAppointment(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
 
@@ -22,21 +22,17 @@ func (h handler) UpdateOwner(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(err)
 	}
 
-	var updateOwner models.Owner
-	json.Unmarshal(body, &updateOwner)
+	var updateAppointment models.Appointment
+	json.Unmarshal(body, &updateAppointment)
 
-	var owner models.Owner
-	if result := h.DB.First(&owner, id); result.Error != nil {
+	var appointment models.Appointment
+	if result := h.DB.First(&appointment, id); result.Error != nil {
 		fmt.Println(result.Error)
 	}
 
-	owner.Cpf = updateOwner.Cpf
-	owner.Name = updateOwner.Name
-	owner.Email = updateOwner.Email
-	owner.Mobile = updateOwner.Mobile
-	owner.Pets = updateOwner.Pets
+	appointment.Date = updateAppointment.Date
 
-	h.DB.Save(&owner)
+	h.DB.Save(&appointment)
 
 	w.Header().Add("Content-type", "application/json")
 	w.WriteHeader(http.StatusOK)

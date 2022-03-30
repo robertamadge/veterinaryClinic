@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-func (h handler) CreateOwners(w http.ResponseWriter, r *http.Request) {
+func (h handler) CreateDoctor(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 
@@ -17,11 +17,11 @@ func (h handler) CreateOwners(w http.ResponseWriter, r *http.Request) {
 		log.Fatalln(err)
 	}
 
-	var owner models.Owner
-	json.Unmarshal(body, &owner)
+	var doctor models.Doctor
+	json.Unmarshal(body, &doctor)
 
-	// Append to the Owners table
-	if result := h.DB.Create(&owner); result.Error != nil {
+	// Append to the Doctor table
+	if result := h.DB.Create(&doctor); result.Error != nil {
 		fmt.Println(result.Error)
 	}
 

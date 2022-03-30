@@ -1,10 +1,11 @@
 package db
 
 import (
+	"log"
+
 	"github.com/robertamadge/veterinayClinic/pkg/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"log"
 )
 
 

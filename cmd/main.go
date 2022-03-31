@@ -13,8 +13,6 @@ func main() {
 	h := handlers.New(DB)
 	router := mux.NewRouter()
 
-	router.HandleFunc("/", h.GetTemplate)
-
 	router.HandleFunc("/owners", h.GetAllOwners).Methods(http.MethodGet)
 	router.HandleFunc("/owners/{id}", h.GetOwner).Methods(http.MethodGet)
 	router.HandleFunc("/owners", h.CreateOwner).Methods(http.MethodPost)
@@ -38,6 +36,8 @@ func main() {
 	router.HandleFunc("/appointments", h.CreateAppointment).Methods(http.MethodPost)
 	router.HandleFunc("/appointments/{id}", h.UpdateAppointment).Methods(http.MethodPut)
 	router.HandleFunc("/appointments/{id}", h.DeleteAppointment).Methods(http.MethodDelete)
+
+
 	fmt.Println(http.ListenAndServe(":8000", router))
 }
 

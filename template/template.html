@@ -1,35 +1,77 @@
 <!DOCTYPE html>
-    <html>
+<html>
 
-        <head>
-            <title>Veterinary Clinic {{.Clinic}}</title>
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" type="text/css" href="static/template.css">
-        </head>
+<head>
+    <title>Veterinary Clinic</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="template.css">
+
+    <style>
+        * {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            box-sizing: border-box;
+            background-color: #266B80;
+            text-align: center;
+        }
+        @media only screen and (max-width: 620px) {
+            /* For mobile phones: */
+            .menu, .main, .right {
+                width: 100%;
+            }
+        }
+
+        .menu {
+            float: left;
+            width: 20%;
+            text-align: center;
+        }
+
+        .menu a {
+            background-color: #4cb0cf;
+            padding: 8px;
+            margin-top: 7px;
+            display: block;
+            width: 100%;
+            color: black;
+        }
+
+        .main {
+            float: left;
+            width: 60%;
+            padding: 0 20px;
+        }
+
+        .right {
+            background-color: #4cb0cf;
+            float: left;
+            width: 20%;
+            padding: 15px;
+            margin-top: 7px;
+            text-align: center;
+            background-size: auto;
+        }
+    </style>
+</head>
 
 <body>
 <div>
-    <h1>Bel Veterinary Clinic</h1>
-</div>
-
-<div>
+    <h2>Bel Veterinary Clinic</h2>
     <div class="menu">
         <a href="/signin">SignIn</a>
-        <a href="/owners">SignUp</a>
-        <a href="/appointment">Book an appointment</a>
+        <a href="/owners">Owners</a>
+        <a href="/doctors">Doctors</a>
+        <a href="/appointments">Book an appointment</a>
     </div>
     <div class="main">
         <h2>Register to book an appointment</h2>
         <hr>
-        <p>Our clinic provides services for your pet. You can book an appointment right!"</p>
-        <img src="static/vetimg.jpg" style="max-width:100%;height:auto;">
+        <p>Our clinic provides services for your pet. You can book an appointment right now!"</p>
     </div>
 
     <div class="right">
-        <h2>About</h2>
-        <p>Our clinic has many services for your pet.</p>
-        <img src="static/vertical.jpg" style="max-width:100%;height:auto;">
+        <h2 style="background-color: #4cb0cf">About</h2>
+        <p style="background-color: #4cb0cf">Our clinic has many services for your pet.</p>
+        <img src="static/vertical.jpg" alt="cat" style="max-width:100%;height:auto;">
     </div>
 </div>
 </body>

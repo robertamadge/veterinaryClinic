@@ -8,10 +8,13 @@ import (
 	"net/http"
 )
 
+
 func main() {
 	DB := db.Init()
 	h := handlers.New(DB)
 	router := mux.NewRouter()
+
+	router.HandleFunc("/", h.GetTemplate)
 
 	router.HandleFunc("/owners", h.GetAllOwners).Methods(http.MethodGet)
 	router.HandleFunc("/owners/{id}", h.GetOwner).Methods(http.MethodGet)
@@ -24,6 +27,7 @@ func main() {
 	router.HandleFunc("/pets", h.CreatePet).Methods(http.MethodPost)
 	router.HandleFunc("/pets/{id}", h.UpdatePet).Methods(http.MethodPut)
 	router.HandleFunc("/pets/{id}", h.DeletePet).Methods(http.MethodDelete)
+
 
 	router.HandleFunc("/doctors", h.GetAllDoctors).Methods(http.MethodGet)
 	router.HandleFunc("/doctors/{id}", h.GetDoctor).Methods(http.MethodGet)
